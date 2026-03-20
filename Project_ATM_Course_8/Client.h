@@ -6,7 +6,7 @@
 #include <string>
 
 using namespace std;
-const string CFileName = "MyFile.text";
+
 namespace MyClient {
     struct StClient {
         string AccountNumber;
@@ -102,7 +102,7 @@ namespace MyClient {
         return Client;
     }
 
-    vector< MyClient::StClient> LoadClientDataFromFile(string FileName) {
+    vector< MyClient::StClient> LoadClientDataFromFile(string CFileName = "MyFile.text") {
         vector<MyClient::StClient> Vec;
         fstream MyFile;
         MyFile.open(CFileName, ios::in);
@@ -129,5 +129,5 @@ namespace MyClient {
 
 
     }
- 
+   
 }

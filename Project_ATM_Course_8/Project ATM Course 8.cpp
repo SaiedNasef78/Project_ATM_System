@@ -3,9 +3,12 @@
 
 #include <iostream>
 #include "Delete.h"
+#include "Client.h"
 #include <fstream>
 using namespace std;
 const string FileName = "MyFile.text";
+
+MyClient::StClient Client;
 enum enWithDrawQuick {
 	ch1=1,
 	ch2=2,
@@ -36,7 +39,7 @@ void GoBackToMainMenue() {
 }
 
 
-MyClient::StClient Client;
+
 short getQuickWithDarw(short  WithDarwQuick) {
 
 	switch (WithDarwQuick) {
@@ -91,10 +94,13 @@ void PlatformToWithDarw(short  WithDarwQuick) {
 			return;
 
 		}
-		vector<MyClient::StClient> Vec = MyClient::LoadClientDataFromFile(FileName);
-		MyD::DepostAccountBalance(Client.AccountNumber, QuickWithDarw*-1, Vec);
-		Client.AccountBalance -= QuickWithDarw;
+		vector<MyClient::StClient> Vec = MyClient::LoadClientDataFromFile();
+		if (!MyD::DepostAccountBalance(Client.AccountNumber, QuickWithDarw * -1, Vec)) {
+			return;
+		}
+		Client.AccountBalance = Client.AccountBalance- QuickWithDarw;
 
+		cout << "\n Done Successfully New Balance Is : " << Client.AccountBalance << endl;
 }
 
 short ReadchooseWithDraw() {
@@ -112,11 +118,11 @@ void ShowQuickWithDraw() {
 	cout << "========================================\n";
 	cout << "\t\tQuick WithDraw\n";
 	cout << "========================================\n";
-	cout << "\t\t[1] 20\t\t\t[2] 50\n";
-	cout << "\t\t[3] 100\t\t\t[4] 200\n";
-	cout << "\t\t[5] 400\t\t\t[6] 600\n";
-	cout << "\t\t[7] 800\t\t\t[8] 1000\n";
-	cout << "\t\t[9] Exite\n";
+	cout << "\t[1] 20\t\t[2] 50\n";
+	cout << "\t[3] 100\t\t[4] 200\n";
+	cout << "\t[5] 400\t\t[6] 600\n";
+	cout << "\t[7] 800\t\t[8] 1000\n";
+	cout << "\t[9] Exite\n";
 	cout << "========================================\n";
 	cout << "Your Balance is " << Client.AccountBalance << endl;
 
@@ -152,18 +158,22 @@ int ReadWithDarw() {
 void ShowWithDrawScreen() {
 
 
-	
+	cout << "\nYour Balnce is: " << Client.AccountBalance << endl;
 	int WithDraw = ReadWithDarw();
+	
 	if (WithDraw >= Client.AccountBalance) {
 		cout << "\nThe amount exceds your balance, make another choise.";
 		GoBackToMainMenue();
 
 	}
-	vector<MyClient::StClient> Vec = MyD::LoadClintDataFromFile(FileName);
+	vector<MyClient::StClient> Vec = MyD::LoadClintDataFromFile();
 	Client.AccountBalance -= WithDraw;
-	MyD::DepostAccountBalance(Client.AccountNumber, WithDraw * -1, Vec);
-	/*Client.AccountBalance -= WithDraw;*/
 
+	if (MyD::DepostAccountBalance(Client.AccountNumber, WithDraw * -1, Vec)) {
+		cout << "\nDone Successfully New Balance is: " << Client.AccountBalance << endl;
+	}
+	/*Client.AccountBalance -= WithDraw;*/
+	
 
 
 }
@@ -188,9 +198,13 @@ double ReadPositiveAmmount() {
 }
 void PlatformDepost(double Ammount) {
 
-	vector<MyClient::StClient> Vec = MyD::LoadClintDataFromFile(FileName);
-	MyD::DepostAccountBalance(Client.AccountNumber, Ammount, Vec);
+	vector<MyClient::StClient> Vec = MyD::LoadClintDataFromFile("MyFile.text");
+	if (!MyD::DepostAccountBalance(Client.AccountNumber, Ammount, Vec)) {
+		return;
+	}
+	
 	Client.AccountBalance += Ammount;
+	cout << "\n Done Successfully New Balance Is : " << Client.AccountBalance << endl;
 }
 void ShowDepostClientBalnce() {
 	
@@ -261,7 +275,7 @@ bool LoadClinetInfo(string AccountNumber, string PinCode, vector<MyClient::StCli
 
 }
 void Login() {
-	vector<MyClient::StClient> Vec = MyD::LoadClintDataFromFile(FileName);
+	vector<MyClient::StClient> Vec = MyD::LoadClintDataFromFile();
 
 	bool LoginFaild = false;
 	string AccountNumber;

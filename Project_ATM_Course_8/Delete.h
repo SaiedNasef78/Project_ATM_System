@@ -6,9 +6,9 @@
 #include<fstream>
 #include"Client.h"
     using namespace std;
-    const string FileName = "MyFile.text";
+    
     namespace MyD {
-        vector<MyClient::StClient> LoadClintDataFromFile(string FileName) {
+        vector<MyClient::StClient> LoadClintDataFromFile(string FileName = "MyFile.text") {
 
             fstream MyFile;
 
@@ -93,7 +93,7 @@
 
             fstream MyFile;
 
-            MyFile.open(FileName, ios::out);
+            MyFile.open("MyFile.text", ios::out);
             if (MyFile.is_open()) {
                 string Line;
                 for (MyClient::StClient C : VClient) {
@@ -170,8 +170,8 @@
 
                         C.AccountBalance += Ammount;
                         SaveClientToFile(VClient);
-                        VClient = LoadClintDataFromFile(FileName);
-                        cout << "\n Done Successfully New Balance Is : " << C.AccountBalance << endl;
+                        VClient = LoadClintDataFromFile();
+                       
                         return true;
                     }
                 }
@@ -218,6 +218,7 @@
         }
 
     }
+    
     
     
 
