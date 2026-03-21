@@ -156,13 +156,3 @@ g++ Project_ATM_OOP.cpp -o ATM_OOP
 
 
 
-
-## الـ Commit Message للـ Procedural files:
-
-Add ATM procedural version (Project_ATM_Course_8)
-
-- Console-based ATM using functions and namespaces (no OOP)
-- Features: login, quick withdraw, normal withdraw, deposit, check balance
-- Data persisted in MyFile.text using #//# delimiter format
-- First version before OOP refactor — intentionally kept for comparison
-```
