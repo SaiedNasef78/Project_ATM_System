@@ -1,4 +1,4 @@
-## الـ README نص:
+
 # 🏧 ATM System — Procedural vs OOP
 
 A console-based ATM simulation built in **C++**, developed **twice** — once using **Procedural Programming**, and once refactored using **Object-Oriented Programming** — to demonstrate the real-world impact of OOP design principles on the same project.
