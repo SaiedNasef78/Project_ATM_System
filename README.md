@@ -152,7 +152,7 @@ g++ Project_ATM_OOP.cpp -o ATM_OOP
 
 ## 🔗 Related Projects
 
-- [🏦 Bank Client Management System](https://github.com/SaiedNasef78/Course11-OOP-as-it-Should-Be) — A more advanced OOP project with user management, permissions, currency exchange, and transfer logs
+- [🏦 Bank Client Management System](https://github.com/SaiedNasef78/Course11-OOP-as-it-Should-Be/tree/main/Project_Banck_System/ShowMainMinue) — A more advanced OOP project with user management, permissions, currency exchange, and transfer logs
 
 
 
